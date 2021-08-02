@@ -56,12 +56,10 @@ module.exports.removeMovie = (req, res, next) => {
   const { movieId } = req.params;
   const userId = req.user._id;
   return Movie.checkMovieOwner(movieId, userId)
-    .then((data) => {
-      Movie.findByIdAndRemove(data._id)
-        .then((movie) => {
-          res.send({ data: movie });
-        });
-    })
+    .then((data) => Movie.findByIdAndRemove(data._id)
+      .then(() => {
+        res.status(200).send({ message: 'Фильм удален' });
+      }))
     .catch((err) => {
       if (err.name === 'CastError') {
         const error = new NotFoundError(ERROR_MESSAGE_NOT_FOUND_FILM);
