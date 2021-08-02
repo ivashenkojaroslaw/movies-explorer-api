@@ -11,3 +11,4 @@ module.exports.ERROR_MESSAGE_CONFLICT_USER_EMAIL = 'Данный e-mail адре
 module.exports.ERROR_MESSAGE_NOT_FOUND_USER = 'Нет пользователя с таким id';
 module.exports.ERROR_MESSAGE_NOT_FOUND_URL = 'URL не найден!';
 module.exports.ERROR_MESSAGE_TOO_MANY_REQUEST = 'Очень много запросов к серверу. (300 запросов в час)';
+module.exports.ERROR_MESSAGE_NOT_VALID_DATA_FORMAT = 'Неверный формат данных';

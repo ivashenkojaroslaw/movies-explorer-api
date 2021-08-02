@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const AuthorisationError = require('../errors/authorisation-error');
 
-const { ERROR_MESSAGE_AUTHORISATION } = require('../utils/constants');
+const { ERROR_MESSAGE_AUTHORISATION, ERROR_MESSAGE_NOT_VALID_DATA_FORMAT } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
       validator(v) {
         return validator.isEmail(v);
       },
-      message: 'Это не почта',
+      message: ERROR_MESSAGE_NOT_VALID_DATA_FORMAT,
     },
   },
   password: {

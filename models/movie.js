@@ -4,7 +4,10 @@ const NotFoundError = require('../errors/not-found-error');
 const ForbiddenError = require('../errors/forbidden-error');
 const ConflictError = require('../errors/conflict-error');
 
-const { ERROR_MESSAGE_NOT_FOUND_FILM, ERROR_MESSAGE_FORBIDDEN, ERROR_MESSAGE_CONFLICT_FILM_IN_USER_LIST } = require('../utils/constants');
+const {
+  ERROR_MESSAGE_NOT_FOUND_FILM, ERROR_MESSAGE_FORBIDDEN,
+  ERROR_MESSAGE_CONFLICT_FILM_IN_USER_LIST, ERROR_MESSAGE_NOT_VALID_DATA_FORMAT,
+} = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -41,7 +44,7 @@ const movieSchema = new mongoose.Schema({
         const regExp = /(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*(#\/)?$/gmi;// eslint-disable-line
         return regExp.test(v);
       },
-      message: 'Неверный формат данных',
+      message: ERROR_MESSAGE_NOT_VALID_DATA_FORMAT,
     },
   },
   trailer: {
@@ -52,7 +55,7 @@ const movieSchema = new mongoose.Schema({
         const regExp = /(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*(#\/)?$/gmi;// eslint-disable-line
         return regExp.test(v);
       },
-      message: 'Неверный формат данных',
+      message: ERROR_MESSAGE_NOT_VALID_DATA_FORMAT,
     },
   },
   thumbnail: {
@@ -63,7 +66,7 @@ const movieSchema = new mongoose.Schema({
         const regExp = /(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*(#\/)?$/gmi;// eslint-disable-line
         return regExp.test(v);
       },
-      message: 'Неверный формат данных',
+      message: ERROR_MESSAGE_NOT_VALID_DATA_FORMAT,
     },
   },
   owner: {

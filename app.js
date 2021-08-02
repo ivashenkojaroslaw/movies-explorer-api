@@ -10,9 +10,13 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./middlewares/rateLimit');
 
 const { NODE_ENV, DATA_BASE_URL } = process.env;
+const { config } = require('./utils/config');
+
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.use(requestLogger);
 
 app.use(limiter);
 app.use(cors);
@@ -21,14 +25,12 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(NODE_ENV === 'production' ? DATA_BASE_URL : 'mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect(NODE_ENV === 'production' ? DATA_BASE_URL : `${config.database.type}://${config.database.host}:${config.database.port}/${config.database.db}`, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-
-app.use(requestLogger);
 
 require('./routes/index')(app);
 
