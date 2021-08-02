@@ -60,12 +60,12 @@ module.exports.getCurrentUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name } = req.body;
+  const { name, email } = req.body;
   const userId = req.user._id;
 
-  User.findByIdAndUpdate(userId, { name }, { runValidators: true, new: true })
+
+  User.findByIdAndUpdate(userId, { name, email }, { runValidators: true, new: true })
     .then((user) => {
-      console.log(user);
       if (!user) {
         throw new NotFoundError(ERROR_MESSAGE_NOT_FOUND_USER);
       }
