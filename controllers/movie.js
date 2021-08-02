@@ -38,8 +38,9 @@ module.exports.createMovie = (req, res, next) => {
       if (err.name === 'ValidationError') {
         const error = new DataRequestError(ERROR_MESSAGE_FILM_DATA_REQUEST);
         next(error);
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -64,7 +65,8 @@ module.exports.removeMovie = (req, res, next) => {
       if (err.name === 'CastError') {
         const error = new NotFoundError(ERROR_MESSAGE_NOT_FOUND_FILM);
         next(error);
+      } else {
+        next(err);
       }
-      next(err);
     });
 };

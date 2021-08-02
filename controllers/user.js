@@ -34,8 +34,9 @@ module.exports.createUser = (req, res, next) => {
           } else if (err.name === 'MongoError' && err.code === 11000) {
             const error = new ConflictError(ERROR_MESSAGE_CONFLICT_USER_EMAIL);
             next(error);
+          } else {
+            next(err);
           }
-          next(err);
         });
     });
 };
@@ -54,8 +55,9 @@ module.exports.getCurrentUser = (req, res, next) => {
       if (err.name === 'CastError') {
         const error = new NotFoundError(ERROR_MESSAGE_NOT_FOUND_USER);
         next(error);
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -77,8 +79,9 @@ module.exports.updateUser = (req, res, next) => {
       } else if (err.name === 'ValidationError') {
         const error = new DataRequestError(ERROR_MESSAGE_USER_DATA_REQUEST);
         next(error);
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 

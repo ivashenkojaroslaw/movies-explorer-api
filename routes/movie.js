@@ -1,8 +1,16 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
+
 const {
   createMovie, getMovies, removeMovie,
 } = require('../controllers/movie');
+
+const {
+  ERROR_MESSAGE_VALIDATE_REQUEST_IMAGE_FIELD,
+  ERROR_MESSAGE_VALIDATE_REQUEST_TRAILER_FIELD,
+  ERROR_MESSAGE_VALIDATE_REQUEST_THUMBNAIL_FIELD,
+} = require('../utils/constants');
 
 router.get('/', getMovies);
 
@@ -13,9 +21,24 @@ router.post('/', celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required().min(2).max(1000),
-    image: Joi.string().required().regex(/(https?:\/\/)([\da-z-]+)\.([a-z]{2,6})([\/\w.-]*)*(#\/)?$/mi), // eslint-disable-line
-    trailer: Joi.string().required().regex(/(https?:\/\/)([\da-z-]+)\.([a-z]{2,6})([\/\w.-]*)*(#\/)?$/mi), // eslint-disable-line
-    thumbnail: Joi.string().required().regex(/(https?:\/\/)([\da-z-]+)\.([a-z]{2,6})([\/\w.-]*)*(#\/)?$/mi), // eslint-disable-line
+    image: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message(ERROR_MESSAGE_VALIDATE_REQUEST_IMAGE_FIELD);
+    }),
+    trailer: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message(ERROR_MESSAGE_VALIDATE_REQUEST_TRAILER_FIELD);
+    }),
+    thumbnail: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message(ERROR_MESSAGE_VALIDATE_REQUEST_THUMBNAIL_FIELD);
+    }),
     movieid: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),

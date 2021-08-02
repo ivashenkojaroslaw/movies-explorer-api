@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const validator = require('validator');
 const NotFoundError = require('../errors/not-found-error');
 const ForbiddenError = require('../errors/forbidden-error');
 const ConflictError = require('../errors/conflict-error');
@@ -40,9 +40,8 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator(v) {
-        const regExp = /(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*(#\/)?$/gmi;// eslint-disable-line
-        return regExp.test(v);
+      validator(value) {
+        return validator.isURL(value);
       },
       message: ERROR_MESSAGE_NOT_VALID_DATA_FORMAT,
     },
@@ -51,9 +50,8 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator(v) {
-        const regExp = /(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*(#\/)?$/gmi;// eslint-disable-line
-        return regExp.test(v);
+      validator(value) {
+        return validator.isURL(value);
       },
       message: ERROR_MESSAGE_NOT_VALID_DATA_FORMAT,
     },
@@ -62,9 +60,8 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator(v) {
-        const regExp = /(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*(#\/)?$/gmi;// eslint-disable-line
-        return regExp.test(v);
+      validator(value) {
+        return validator.isURL(value);
       },
       message: ERROR_MESSAGE_NOT_VALID_DATA_FORMAT,
     },

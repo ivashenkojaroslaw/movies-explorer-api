@@ -12,3 +12,7 @@ module.exports.ERROR_MESSAGE_NOT_FOUND_USER = 'Нет пользователя �
 module.exports.ERROR_MESSAGE_NOT_FOUND_URL = 'URL не найден!';
 module.exports.ERROR_MESSAGE_TOO_MANY_REQUEST = 'Очень много запросов к серверу. (300 запросов в час)';
 module.exports.ERROR_MESSAGE_NOT_VALID_DATA_FORMAT = 'Неверный формат данных';
+
+module.exports.ERROR_MESSAGE_VALIDATE_REQUEST_IMAGE_FIELD = 'Поле image заполнено некорректно';
+module.exports.ERROR_MESSAGE_VALIDATE_REQUEST_TRAILER_FIELD = 'Поле trailer заполнено некорректно';
+module.exports.ERROR_MESSAGE_VALIDATE_REQUEST_THUMBNAIL_FIELD = 'Поле thumbnail заполнено некорректно';
