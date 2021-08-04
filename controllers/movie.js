@@ -10,17 +10,17 @@ const {
 
 module.exports.createMovie = (req, res, next) => {
   const {
-    nameEN, nameRU, movieid, thumbnail, trailer, image,
+    nameEN, nameRU, movieId, thumbnail, trailer, image,
     description, year, duration, director, country,
   } = req.body;
   const owner = req.user._id;
-  return Movie.isMovieExistInUserList(movieid, owner)
+  return Movie.isMovieExistInUserList(movieId, owner)
     .then((isExist) => {
       if (!isExist) {
         Movie.create({
           nameEN,
           nameRU,
-          movieid,
+          movieId,
           thumbnail,
           trailer,
           image,
