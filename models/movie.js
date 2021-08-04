@@ -71,7 +71,7 @@ const movieSchema = new mongoose.Schema({
     ref: 'user',
     required: true,
   },
-  movieid: {
+  movieId: {
     type: Number,
     required: true,
   },
@@ -98,11 +98,11 @@ movieSchema.statics.checkMovieOwner = function (movieId, userId) {
     });
 };
 
-movieSchema.statics.isMovieExistInUserList = function (movieid, userId) {
+movieSchema.statics.isMovieExistInUserList = function (movieId, userId) {
   return this.find({ owner: userId })
     .then((movies) => {
       if (movies) {
-        const findedMovie = movies.find((movie) => movie.movieid === movieid);
+        const findedMovie = movies.find((movie) => movie.movieId === movieId);
         if (findedMovie) throw new ConflictError(ERROR_MESSAGE_CONFLICT_FILM_IN_USER_LIST);
         else Promise.resolve(false);
       }

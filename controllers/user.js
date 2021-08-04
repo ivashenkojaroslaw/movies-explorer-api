@@ -79,6 +79,9 @@ module.exports.updateUser = (req, res, next) => {
       } else if (err.name === 'ValidationError') {
         const error = new DataRequestError(ERROR_MESSAGE_USER_DATA_REQUEST);
         next(error);
+      } else if (err.codeName === 'DuplicateKey') {
+        const error = new ConflictError(ERROR_MESSAGE_CONFLICT_USER_EMAIL);
+        next(error);
       } else {
         next(err);
       }

@@ -39,7 +39,7 @@ router.post('/', celebrate({
       }
       return helpers.message(ERROR_MESSAGE_VALIDATE_REQUEST_THUMBNAIL_FIELD);
     }),
-    movieid: Joi.number().required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
