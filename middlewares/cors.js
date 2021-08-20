@@ -3,6 +3,7 @@ const allowedCors = [
   'https://diplom.front.nomoredomains.club',
   'http://www.diplom.front.nomoredomains.club',
   'https://www.diplom.front.nomoredomains.club',
+  'http://localhost:3001',
 ];
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 

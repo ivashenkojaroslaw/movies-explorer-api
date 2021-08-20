@@ -20,7 +20,7 @@ router.post('/', celebrate({
     director: Joi.string().required().min(2).max(30),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    description: Joi.string().required().min(2).max(1000),
+    description: Joi.string().required().min(2),
     image: Joi.string().required().custom((value, helpers) => {
       if (validator.isURL(value)) {
         return value;
